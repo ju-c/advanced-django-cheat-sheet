@@ -349,7 +349,7 @@ class Book(models.Model):
 
 ### The get_absolute_url Method
 [Django Documentation: get_absolute_url()](https://docs.djangoproject.com/en/stable/ref/models/instances/#get-absolute-url)  
-The str method method sets a canonical URL for the model.
+The `get_absolute_url` method sets a canonical URL for the model.
 ```python
 # my_book_app/models.py
 from django.db import models
