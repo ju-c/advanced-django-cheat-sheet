@@ -3,6 +3,8 @@
 Be aware it's not an exhaustive list.
 If you have ideas, correction or recommendation do not hesitate.
 
+--------------------
+
 ## Sections
 - [Preparing environnement](#preparing-environnement)
 - [Creating a Django project](#creating-a-django-project)
@@ -75,7 +77,11 @@ If you have ideas, correction or recommendation do not hesitate.
 	- [ALLOWED_HOSTS](#allowed_hosts)
 - [Further Reading](#further-eading)
 
-## Preparing enviro­nnement
+--------------------
+
+## Preparing enviro­nnement  
+**[`^        back to top        ^`](#advanced-django-cheat-sheet)**
+
 - Create project folder and navigate to it.
 ```
 mkdir projec­t_name && cd $_
@@ -108,6 +114,8 @@ pip install -r requir­eme­nts.txt
 ```
 
 ## Creating a Django project
+**[`^        back to top        ^`](#advanced-django-cheat-sheet)**
+
 - Starting a new Django project.
 A config directory wil be created in your current directory.
 ```
@@ -119,6 +127,8 @@ python manage.py runserver
 ```
 
 ## Creating a Django app
+**[`^        back to top        ^`](#advanced-django-cheat-sheet)**
+
 - Creating an `my_app` directory and all default files/f­olders inside.
 ```
 python manage.py startapp my_app
@@ -138,6 +148,8 @@ urlpat­terns = [
 ```
 ## Custom User
 ### Custom User Model
+**[`^        back to top        ^`](#advanced-django-cheat-sheet)**
+
 [Django documentation: Using a custom user model when starting a project](https://docs.djangoproject.com/en/stable/topics/auth/customizing/#using-a-custom-user-model-when-starting-a-project)  
 1. Create a `CustomUser` model  
 	The `CustomUser` model will live within its own app (for example, 'accounts').
@@ -161,6 +173,8 @@ urlpat­terns = [
 	```
 	- Migrate
 ### Custom User Forms
+**[`^        back to top        ^`](#advanced-django-cheat-sheet)**
+
 Updating the built-in forms to point to the custom user model instead of `User`.    
 
 ```python
@@ -187,6 +201,8 @@ class CustomUserChangeForm(UserChangeForm):
 ```
 
 ### Custom User Admin
+**[`^        back to top        ^`](#advanced-django-cheat-sheet)**
+
 Extending the existing `UserAdmin` into `CustomUserAdmin`.    
 
 ```python
@@ -211,13 +227,17 @@ class CustomUserAdmin(UserAdmin):
 ```
 
 ### Superuser
+**[`^        back to top        ^`](#advanced-django-cheat-sheet)**
+
 ```
 python manage.py createsuperuser
 ```
 
 ## Migration
+[Django Documentation: Migrations](https://docs.djangoproject.com/en/stable/topics/migrations/)
+
 ### makemigration and migrate
-[Migrations in the Django Doc](https://docs.djangoproject.com/en/stable/topics/migrations/)
+**[`^        back to top        ^`](#advanced-django-cheat-sheet)**
 
 **makemigrations**: This command generates migration files based on the changes detected in your models.
 It compares the current state of your models with the migration files already created and determines the SQL commands required to propagate the changes to your database schema.
@@ -232,6 +252,8 @@ python manage.py migrate
 This will update your database schema with the changes made to your models.
 
 ### Fake initial migration
+**[`^        back to top        ^`](#advanced-django-cheat-sheet)**
+
  In Django, a "fake initial migration" refers to a concept where you mark a migration as applied without actually executing the database schema changes associated with that migration.
 It allows you to synchronize the state of the migrations with the database without performing any database modifications.
  ```
@@ -243,6 +265,8 @@ It's important to note that **faking the initial migration assumes that the exis
 [Django Documentation: Models](https://docs.djangoproject.com/en/stable/topics/db/models/#module-django.db.models)  
 
 ### Model Style Ordering
+**[`^        back to top        ^`](#advanced-django-cheat-sheet)**
+
 - Choices
 - Database fields
 - Custom manager attributes
@@ -253,6 +277,8 @@ It's important to note that **faking the initial migration assumes that the exis
 - Custom methods
 
 ### Model and Field Names
+**[`^        back to top        ^`](#advanced-django-cheat-sheet)**
+
 ```python
 # my_book_app/models.py
 from django.db import models
@@ -265,6 +291,8 @@ Models represents a single object and should always be Capitalized and singular 
 Fields should all be snake_case, not camelCase.
 
 ### Choices
+**[`^        back to top        ^`](#advanced-django-cheat-sheet)**
+
 If choices are defined for a given model field, define each choice as a tuple of tuples, with an all-uppercase name as a class attribute on the model ([source](https://learndjango.com/tutorials/django-best-practices-models)).
 ```python
 # my_book_app/models.py
@@ -284,12 +312,16 @@ class Book(models.Model):
 ```
 
 ### Blank and Null Fields
+**[`^        back to top        ^`](#advanced-django-cheat-sheet)**
+
  - **Null**: Database-related. Defines if a given database column will accept null values or not.
  - **Blank**: Validation-related. It will be used during forms validation, when calling `form.is_valid()`.
  
 Do not use null with string-based fields like `CharField` or `TextField` as this leads to two possible values for "no data".   The Django convention is instead to use the empty string "", not `NULL` ([source](https://simpleisbetterthancomplex.com/tips/2018/02/10/django-tip-22-designing-better-models.html). 
 
 ### Meta class
+**[`^        back to top        ^`](#advanced-django-cheat-sheet)**
+
 [Django Documentation: Meta class](https://docs.djangoproject.com/en/stable/ref/models/options/)
 
 An example, using `[indexes](#indexes)`, `ordering`, `verbose_name` and `verbose_name_plural`.  
@@ -319,6 +351,8 @@ class Book(models.Model):
 
 
 ### The str Method
+**[`^        back to top        ^`](#advanced-django-cheat-sheet)**
+
 [Django Documentation: __str__()](https://docs.djangoproject.com/en/stable/ref/models/instances/#str)  
 The str method defines a string representation, a more descriptive name/title, for any of our objects that is displayed in the Django admin site and in the Django shell.
 ```python
@@ -348,6 +382,8 @@ class Book(models.Model):
 ```
 
 ### The get_absolute_url Method
+**[`^        back to top        ^`](#advanced-django-cheat-sheet)**
+
 [Django Documentation: get_absolute_url()](https://docs.djangoproject.com/en/stable/ref/models/instances/#get-absolute-url)  
 The `get_absolute_url` method sets a canonical URL for the model.
 ```python
@@ -384,6 +420,8 @@ Using the `get_absolute_url` in our templates:
 ```
 
 ### UniqueConstraint
+**[`^        back to top        ^`](#advanced-django-cheat-sheet)**
+
 [Django Documentation: uniqueConstraint](https://docs.djangoproject.com/en/stable/ref/models/constraints/#uniqueconstraint)
 
 Use `UniqueConstraint` when you want to enforce uniqueness on a combination of fields or need additional functionality like custom constraint names or conditional constraints
@@ -400,10 +438,14 @@ class Booking(models.Model):
 ```
 
 ### Models: Further reading
+**[`^        back to top        ^`](#advanced-django-cheat-sheet)**
+
 - [LearnDjango: Django Best Practices: Models (2022)](https://learndjango.com/tutorials/django-best-practices-models)  
 - [Simple is better than complex: Designing Better Models (2018)](https://simpleisbetterthancomplex.com/tips/2018/02/10/django-tip-22-designing-better-models.html)
 
 ## Model Managers
+**[`^        back to top        ^`](#advanced-django-cheat-sheet)**
+
 [Django Documentation: Managers](https://docs.djangoproject.com/en/stable/topics/db/managers/)  
 ### Giving a custom name to the default manager
 
@@ -417,6 +459,8 @@ All the operation on the student database table have to be done using the “aut
 Author.authors.filter(...)
 ```
 ### Creating custom managers
+**[`^        back to top        ^`](#advanced-django-cheat-sheet)**
+
 [Django Documentation: Custom managers](https://docs.djangoproject.com/en/stable/topics/db/managers/#custom-managers)
 ```python
 from django.db import models
@@ -441,6 +485,8 @@ class Response(models.Model):
 > If you use custom Manager objects, take note that the first Manager Django encounters (in the order in which they’re defined in the model) has a special status. Django interprets the first Manager defined in a class as the “default” Manager, and several parts of Django (including dumpdata) will use that Manager exclusively for that model. As a result, it’s a good idea to be careful in your choice of default manager in order to avoid a situation where overriding get_queryset() results in an inability to retrieve objects you’d like to work with.
 
 ### Modifying a manager’s initial QuerySet
+**[`^        back to top        ^`](#advanced-django-cheat-sheet)**
+
 [Django Documenation: Modifying a managers's initial QuerySet](https://docs.djangoproject.com/en/stable/topics/db/managers/#modifying-a-manager-s-initial-queryset)
 ```
 # First, define the Manager subclass.
@@ -458,8 +504,11 @@ class Book(models.Model):
     dahl_objects = DahlBookManager()  # The Dahl-specific manager.
 ```
 With this sample model, `Book.objects.all()` will return all books in the database, but `Book.dahl_objects.all()` will only return the ones written by Roald Dahl.
+
 ## Model registration in admin
-[Django doc: ModelAdmin objects](https://docs.djangoproject.com/en/stable/ref/contrib/admin/#modeladmin-objects)
+**[`^        back to top        ^`](#advanced-django-cheat-sheet)**
+
+[Django Documentation: ModelAdmin objects](https://docs.djangoproject.com/en/stable/ref/contrib/admin/#modeladmin-objects)
 
 Model registration in Django's admin interface is the process of making your models accessible through the admin site.
 
@@ -523,8 +572,9 @@ admin.site.register(Order, OrderAdmin)
 ```
 
 ## Django Signals
-- **pre_save**:  
-[Django Doc: pre_save](https://docs.djangoproject.com/en/stable/ref/signals/#pre-save)  
+**[`^        back to top        ^`](#advanced-django-cheat-sheet)**
+
+- **pre_save**: [Django Documentation: pre_save](https://docs.djangoproject.com/en/stable/ref/signals/#pre-save)  
 Using a `pre_save` signal is required to execute code related to another part of your application *prior* to saving the object in the database.
 
 ```python
@@ -539,8 +589,7 @@ def validate_order(sender, instance, **kwargs):
         raise Exception("Insufficient stock quantity.")
 ```
 
-- **post_save**:  
-[Django Doc: post_save](https://docs.djangoproject.com/en/stable/ref/signals/#post-save)  
+- **post_save**: [Django Documentation: post_save](https://docs.djangoproject.com/en/stable/ref/signals/#post-save)  
 Using a `post_save` signal is required to execute code related to another part of your application *after* the object is saved to the database.
 
 ```python
@@ -556,8 +605,7 @@ def remove_from_inventory(sender, instance, **kwargs):
     stock_item.save()
 ```
 
-- **pre_delete**:  
-[Django Doc: pre_delete](https://docs.djangoproject.com/en/stable/ref/signals/#pre-delete)  
+- **pre_delete**: [Django Documentation: pre_delete](https://docs.djangoproject.com/en/stable/ref/signals/#pre-delete)  
 Using a `pre_delete` signal is necessary to execute code related to another part of your application *before* the deletion event of an object occurs.
 
 ```python
@@ -570,8 +618,7 @@ def pre_delete_book(sender, **kwargs):
     print("You are about to delete a book")
 ```
 
-- **post_delete**
-[Django Doc: post_delete](https://docs.djangoproject.com/en/stable/ref/signals/#post-delete)
+- **post_delete** [Django Documentation: post_delete](https://docs.djangoproject.com/en/stable/ref/signals/#post-delete)  
 Using a `post_delete` signal is necessary to execute code related to another part of your application *after* the deletion event of an object occurs.
 
 ```python
@@ -580,8 +627,7 @@ def delete_book(sender, **kwargs):
     print("You have just deleted a book")
 ```
 
-- **m2m_changed**
-[Django Doc: m2m_changed](https://docs.djangoproject.com/en/stable/ref/signals/#m2m-changed)
+- **m2m_changed** [Django Documentation : m2m_changed](https://docs.djangoproject.com/en/stable/ref/signals/#m2m-changed)  
 To send a Django signal when a `ManyToManyField` is changed on a model instance.
 
 Consider this model:
@@ -606,6 +652,8 @@ m2m_changed.connect(my_signal_name, sender=Course.students.through)
 ## Queries and QuerySet
 [Django Documentation: Making queries](https://docs.djangoproject.com/en/stable/topics/db/queries/#making-queries)
 ### Using Q objects for complex queries
+**[`^        back to top        ^`](#advanced-django-cheat-sheet)**
+
 [Django Documentation: Q objects](https://docs.djangoproject.com/en/stable/topics/db/queries/#complex-lookups-with-q-objects)
 
 Q objects can be combined using the `&` (AND) and `|` (OR) operators
@@ -622,7 +670,9 @@ Inventory.objects.filter(
     Q(title__icontains="vacuum")
 ```
 ### Aggregation
-[Django documenation: Aggregation](https://docs.djangoproject.com/en/stable/topics/db/aggregation/#aggregation)
+**[`^        back to top        ^`](#advanced-django-cheat-sheet)**
+
+[Django documentation: Aggregation](https://docs.djangoproject.com/en/stable/topics/db/aggregation/#aggregation)
 
 In Django, aggregation allows you to perform calculations such as counting, summing, averaging, finding the maximum or minimum value, and more, on a specific field or set of fields in a queryset.
 
@@ -648,6 +698,8 @@ In the template:
 <p>Total Ratings: {{ data.ratings_sum }}</p>
 ```
 ### Latest element in QuerySet
+**[`^        back to top        ^`](#advanced-django-cheat-sheet)**
+
 [Django Documentation: latest()](https://docs.djangoproject.com/en/stable/ref/models/querysets/#latest)
 
 This example returns the latest Entry in the table, according to the pub_date field:
@@ -661,7 +713,9 @@ Entry.objects.latest("pub_date", "-expire_date")
 ```
 The negative sign in `'-expire_date'` means to sort `expire_date` in descending order. Since `latest()` gets the last result, the `Entry` with the earliest `expire_date` is selected.
 ### Union of QuerySets
-[union() in the Django Doc](https://docs.djangoproject.com/en/stable/ref/models/querysets/#union)
+**[`^        back to top        ^`](#advanced-django-cheat-sheet)**
+
+[Django Documentation: union()](https://docs.djangoproject.com/en/stable/ref/models/querysets/#union)
 
 Uses SQL’s `UNION` operator to combine the results of two or more QuerySets.
 For example:
@@ -683,6 +737,8 @@ In addition, only `LIMIT`, `OFFSET`, `COUNT(*)`, `ORDER BY`, and specifying colu
 See [select_related and prefetch_related](#select_related-and-prefetch_related)
 
 ### Performing raw SQL queries
+**[`^        back to top        ^`](#advanced-django-cheat-sheet)**
+
 [Django Documentation: Performing raw SQL queries](https://docs.djangoproject.com/en/stable/topics/db/sql/#performing-raw-sql-queries)
 
 ```python
@@ -701,7 +757,9 @@ Project.objects.raw('SELECT id, title FROM myapp_project')
 
 ## View
 
-### Function-based views (FBVs)  
+### Function-based views (FBVs)
+**[`^        back to top        ^`](#advanced-django-cheat-sheet)**
+
 [Django docucmentation: Writing views](https://docs.djangoproject.com/en/stable/topics/http/views/)
 
 From [Django Views - The Right Way](https://spookylukey.github.io/django-views-the-right-way/the-pattern.html#the-explanation): Why `TemplateResponse` over `render` ?
@@ -772,7 +830,10 @@ def task_delete_view(request, pk):
 ```
 
 ### Class-based views (CBVs)
+**[`^        back to top        ^`](#advanced-django-cheat-sheet)**
+
 [Django Documentation : Class-based views](https://docs.djangoproject.com/en/stable/topics/class-based-views/)
+
 ```python
 from django.views.generic import ListView, DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
@@ -809,8 +870,11 @@ class TaskDeleteView(DeleteView):
     success_url = reverse_lazy("task_list")
 ```
 
-### Redirect from view:  
+### Redirect from view:
+**[`^        back to top        ^`](#advanced-django-cheat-sheet)**
+
 [Django Documentation: redirect()](https://docs.djangoproject.com/en/stable/topics/http/shortcuts/#redirect)
+
 ```python
 from django.shortcuts import redirect
 
@@ -836,6 +900,7 @@ def my_view(request):
 
 By default, `redirect()` returns a temporary redirect.  
 All of the above forms accept a permanent argument; if set to `True` a permanent redirect will be returned:
+
 ```python
 def my_view(request):
     ...
@@ -844,10 +909,14 @@ def my_view(request):
 ```
 
 ### View: Further reading
+**[`^        back to top        ^`](#advanced-django-cheat-sheet)**
+
 - [Django Views - The Right Way](https://spookylukey.github.io/django-views-the-right-way/index.html)
 - [Classy Class-Based Views](https://ccbv.co.uk/)
 
 ## Routing
+**[`^        back to top        ^`](#advanced-django-cheat-sheet)**
+
 [Django Documentation: django.urls functions for use in URLconfs](https://docs.djangoproject.com/en/stable/ref/urls/)
 
 - **path()**: Returns an element for inclusion in urlpatterns
@@ -904,9 +973,12 @@ urlpatterns = [
 
 ## Authentication
 ### Authentication views and URLs
+**[`^        back to top        ^`](#advanced-django-cheat-sheet)**
+
 [Django Documentation: Using the views](https://docs.djangoproject.com/en/stable/topics/auth/default/#module-django.contrib.auth.views)
 
 Add Django site authentication urls (for login, logout, password management):
+
 ```python
 # config/urls.py
 from django.contrib import admin
@@ -919,6 +991,7 @@ urlpatterns = [
 ```
 
 Urls provided by the auth app:
+
 ```
 accounts/login/ [name='login']
 accounts/logout/ [name='logout']
@@ -930,7 +1003,8 @@ accounts/reset/<uidb64>/<token>/ [name='password_reset_confirm']
 accounts/reset/done/ [name='password_reset_complete']
 ```
 
-Updating `settings.py` with `LOGIN_REDIRECT_URL` and `LOGOUT_REDIRECT_URL`  
+Updating `settings.py` with `LOGIN_REDIRECT_URL` and `LOGOUT_REDIRECT_URL`
+
 ```
 # config/urls.py
     ...
@@ -942,7 +1016,9 @@ LOGIN_REDIRECT_URL = "home"
 LOGOUT_REDIRECT_URL = "home"
 ```
 
-### Signup  
+### Signup
+**[`^        back to top        ^`](#advanced-django-cheat-sheet)**
+
 To create a sign up page we will need to make our own view and url.  
 ```python
 python manage.py startapp accounts
@@ -1021,6 +1097,8 @@ Then, create a new template templates/registration/signup.html
 ```
 
 ### Password reset
+**[`^        back to top        ^`](#advanced-django-cheat-sheet)**
+
 For development purposes Django let us store emails either in the console or as a file.
 
 - Console backend:  
@@ -1036,14 +1114,20 @@ EMAIL_FILE_PATH = '/tmp/app-messages' # change this to a proper location
 For production, see [Sending Email](#sending-email)
 
 ### OAuth
+**[`^        back to top        ^`](#advanced-django-cheat-sheet)**
+
 The [Django OAuth Toolkit](https://github.com/evonove/django-oauth-toolkit) package provides OAuth 2.0 support and uses [OAuthLib](https://github.com/idan/oauthlib).
 
 ### Authentication: Further reading
+**[`^        back to top        ^`](#advanced-django-cheat-sheet)**
+
 - [Django Documentation: User authentication in Django](https://docs.djangoproject.com/en/stable/topics/auth/)
 - [LearnDjango: Django Login and Logout Tutorial](https://learndjango.com/tutorials/django-login-and-logout-tutorial)
 
 ## Custom Permissions
-[Django Doc: Custom permissions](https://docs.djangoproject.com/en/stable/topics/auth/customizing/#custom-permissions)
+**[`^        back to top        ^`](#advanced-django-cheat-sheet)**
+
+[Django Documentation: Custom permissions](https://docs.djangoproject.com/en/stable/topics/auth/customizing/#custom-permissions)
 
 Adding custom permissions to a Django model:
 ```python
@@ -1112,6 +1196,7 @@ Using [perms](https://docs.djangoproject.com/en/stable/topics/auth/default/#perm
 [Django Documentation: Middleware](https://docs.djangoproject.com/en/stable/ref/middleware/#middleware-ordering)
 
 ### Custom Middleware
+**[`^        back to top        ^`](#advanced-django-cheat-sheet)**
 
 ```python
 # my_app/custom_middlware.py
@@ -1149,6 +1234,8 @@ While processing request object middlware works from top to bottom and while pro
 
 ## Form and Form Validation
 ### Form
+**[`^        back to top        ^`](#advanced-django-cheat-sheet)**
+
 [Django Documentation: Creating forms from models](https://docs.djangoproject.com/en/stable/topics/forms/modelforms/#creating-forms-from-models)
 
 ModelForm
@@ -1184,6 +1271,8 @@ def article_create(request):
 ```
 
 ### Selecting the fields to use
+**[`^        back to top        ^`](#advanced-django-cheat-sheet)**
+
 - Set the fields attribute to the special value `'__all__'` to indicate that all fields in the model should be used.
 
 ```python
@@ -1206,6 +1295,7 @@ class PartialAuthorForm(ModelForm):
 ```
 
 ### Form template
+**[`^        back to top        ^`](#advanced-django-cheat-sheet)**
 
 ```html
 <form action="" method="POST">
@@ -1217,6 +1307,7 @@ class PartialAuthorForm(ModelForm):
 ```
 
 ### Custom form field validators
+**[`^        back to top        ^`](#advanced-django-cheat-sheet)**
 
 ```python
 # my_app/validators.py
@@ -1255,6 +1346,8 @@ class MyModelForm(forms.ModelForm):
 ```
 
 ### clean()
+**[`^        back to top        ^`](#advanced-django-cheat-sheet)**
+
 Performing validation on more than one field at a time.
 
 ```python
@@ -1283,6 +1376,8 @@ class MyForm(forms.ModelForm):
 ```
 
 ### clean_field_name()
+**[`^        back to top        ^`](#advanced-django-cheat-sheet)**
+
 Performing validation on a specific field.
 
 ```python
@@ -1309,7 +1404,9 @@ class ProductForm(forms.ModelForm):
 
 ## Template
 [Django Documentation: The Django template language](https://docs.djangoproject.com/en/stable/ref/templates/language/#the-django-template-language)
+
 ### Template inheritance and inclusion
+**[`^        back to top        ^`](#advanced-django-cheat-sheet)**
 
 - Inheritance
 
@@ -1359,7 +1456,9 @@ class ProductForm(forms.ModelForm):
 {% include 'header.html' %}
 ```
 
-### Common template tags  
+### Common template tags
+**[`^        back to top        ^`](#advanced-django-cheat-sheet)**
+
 - **static**
 
 ```
@@ -1460,6 +1559,8 @@ Note that single lines of text can be commented out using `{#` and `#}`:
 ```
 
 ## Sending Email
+**[`^        back to top        ^`](#advanced-django-cheat-sheet)**
+
 [Django Documentation: Sending email](https://docs.djangoproject.com/en/stable/topics/email/#module-django.core.mail)
 
 Quick example:
@@ -1499,6 +1600,8 @@ EMAIL_HOST_PASSWORD = 'your password'
 
 ## Performance
 ### django-debug-toolbar
+**[`^        back to top        ^`](#advanced-django-cheat-sheet)**
+
 [Django Debug Toolbar Documentation](https://django-debug-toolbar.readthedocs.io/en/latest/)
 
 Install:  
@@ -1525,6 +1628,8 @@ urlpatterns = [
 
 
 ### select_related and prefetch_related
+**[`^        back to top        ^`](#advanced-django-cheat-sheet)**
+
 Django provides two QuerySet methods that can turn the N queries back into one query, solving the performance issue.
 
 These two methods are:
@@ -1575,6 +1680,8 @@ for author in authors:
 ```
 
 ### Indexes
+**[`^        back to top        ^`](#advanced-django-cheat-sheet)**
+
 [Django Documentation: Model index reference](https://docs.djangoproject.com/en/stable/ref/models/indexes/#module-django.db.models.indexes)
 
 If a particular field is consistently utilized, accounting for around 10-25% of all queries, it is a prime candidate
@@ -1593,6 +1700,8 @@ class Author(models.Model):
 
 ### Caching
 #### Redis
+**[`^        back to top        ^`](#advanced-django-cheat-sheet)**
+
 [Django Documentation: Redis](https://docs.djangoproject.com/en/stable/topics/cache/#redis)
 
 1. Setting up a [Redis](https://redis.io/) server locally or on a remote machine.
@@ -1627,6 +1736,8 @@ In order to supply a username and password, add them in the `LOCATION` along wit
  ```
 
 #### Database caching
+**[`^        back to top        ^`](#advanced-django-cheat-sheet)**
+
 [Django Documentation: Database caching](https://docs.djangoproject.com/en/stable/topics/cache/#database-caching)
 
 Django can store its cached data in your database.
@@ -1649,6 +1760,7 @@ python manage.py createcachetable
 ```
 
 #### per-view cache
+**[`^        back to top        ^`](#advanced-django-cheat-sheet)**
 [Django Documentation: The per-view cache](https://docs.djangoproject.com/en/stable/topics/cache/#the-per-view-cache)
 
 In Django, the `cache_page` decorator is used to cache the output of a view function.
@@ -1674,6 +1786,8 @@ urlpatterns = [
 ```
 
 #### per-site cache
+**[`^        back to top        ^`](#advanced-django-cheat-sheet)**
+
 [Django Documentation: per-site cache](https://docs.djangoproject.com/en/stable/topics/cache/#the-per-site-cache)
 
 ```
@@ -1690,6 +1804,8 @@ MIDDLEWARE = [
 `UpdateCacheMiddleware` must come before `FetchFromCacheMiddleware`.
 
 #### template fragment caching
+**[`^        back to top        ^`](#advanced-django-cheat-sheet)**
+
 [Django Documentation: Template fragment caching](https://docs.djangoproject.com/en/stable/topics/cache/#template-fragment-caching)
 
 ```html
@@ -1710,6 +1826,8 @@ The `cache` template tag expects a cache timeout in second with the name of the 
 [Django Documentation: Deployment checklist](https://docs.djangoproject.com/en/stable/howto/deployment/checklist/)
 
 ### Admin Hardening
+**[`^        back to top        ^`](#advanced-django-cheat-sheet)**
+
 Changing the URL path
 
 ```python
@@ -1725,18 +1843,26 @@ urlpatterns = [
 ```
 
 ### Cross site request forgery (CSRF) protection
+**[`^        back to top        ^`](#advanced-django-cheat-sheet)**
+
 Django's CSRF protection is turned on by default. You should always use the `{% csrf_token %}` template tag in your forms and use `POST` for requests that might change or add data to the database.
 
 ### Enforcing SSL HTTPS
+**[`^        back to top        ^`](#advanced-django-cheat-sheet)**
+
 - [SECURE_PROXY_SSL_HEADER](https://docs.djangoproject.com/en/stable/ref/settings/#std:setting-SECURE_PROXY_SSL_HEADER): can be used to check whether content is secure, even if it is incoming from a non-HTTP proxy.
 - HSTS may either be configured with [SECURE_HSTS_SECONDS](https://docs.djangoproject.com/en/stable/ref/settings/#std:setting-SECURE_HSTS_SECONDS) and [SECURE_HSTS_INCLUDE_SUBDOMAINS](https://docs.djangoproject.com/en/stable/ref/settings/#std:setting-SECURE_HSTS_INCLUDE_SUBDOMAINS) or on the Web server.
 - To ensure that cookies are only ever sent over HTTPS, set [SESSION_COOKIE_SECURE](https://docs.djangoproject.com/en/stable/ref/settings/#std:setting-SESSION_COOKIE_SECURE) and [SECURE_HSTS_SECONDS](https://docs.djangoproject.com/en/stable/ref/settings/#std:setting-SECURE_HSTS_INCLUDE_SUBDOMAINS) to `True`
 
 ### ALLOWED_HOSTS
+**[`^        back to top        ^`](#advanced-django-cheat-sheet)**
+
 [Django Documentation: ALLOWED_HOSTS](https://docs.djangoproject.com/en/4.0/ref/settings/#std:setting-ALLOWED_HOSTS)
 Use `ALLOWED_HOSTS` to only accept requests from trusted hosts.
 
 ## Further Reading
+**[`^        back to top        ^`](#advanced-django-cheat-sheet)**
+
 - [Official Django Documentation](https://www.djangoproject.com/)
 - [Django source code](https://github.com/django/django)
 - [Official Django forum](https://forum.djangoproject.com/)
